@@ -1,0 +1,49 @@
+<project name="StickNote" default="run" basedir=".">
+    
+    <!-- properties -->
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="build"/>
+    <property name="dist.dir" value="dist"/>
+    <property name="main.class" value="main.Main"/>
+    <property name="resources.dir" value="resources"/>
+    
+    <!-- create directories -->
+    <target name="init">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${dist.dir}"/>
+    </target>
+    
+     <!-- Copy resources (icon.png) to build directory -->
+    <target name="copy-resources" depends="init">
+        <copy todir="${build.dir}">
+            <fileset dir="${resources.dir}" includes="**/*"/>
+        </copy>
+    </target>
+
+    <!-- Compile Java files -->
+    <target name="compile" depends="copy-resources">
+        <javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime="false"/>
+    </target>
+    
+    <!-- Run the app -->
+    <target name="run" depends="compile">
+        <java classname="${main.class}" fork="true" classpath="${build.dir}"/>
+    </target>
+    
+    <!-- Create a JAR with resources included -->
+    <target name="jar" depends="compile">
+        <jar destfile="${dist.dir}/StickNote.jar" basedir="${build.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="${main.class}"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <!-- Clean build and dist directories -->
+    <target name="clean">
+        <echo>Cleaning build and dist directories...</echo>
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+    
+</project>
