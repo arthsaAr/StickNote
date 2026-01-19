@@ -4,7 +4,7 @@
     <property name="src.dir" value="src"/>
     <property name="build.dir" value="build"/>
     <property name="dist.dir" value="dist"/>
-    <property name="main.class" value="main.Main"/>
+    <property name="main.class" value="com.sticknotes.Main"/>
     <property name="resources.dir" value="resources"/>
     
     <!-- create directories -->
@@ -27,7 +27,11 @@
     
     <!-- Run the app -->
     <target name="run" depends="compile">
-        <java classname="${main.class}" fork="true" classpath="${build.dir}"/>
+        <java classname="${main.class}" fork="true">
+            <classpath>
+                <pathelement path="${build.dir}"/>
+            </classpath>
+        </java>
     </target>
     
     <!-- Create a JAR with resources included -->
