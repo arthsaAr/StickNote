@@ -20,9 +20,11 @@
         </copy>
     </target>
 
-    <!-- Compile Java files -->
+    <!-- Compile all Java files -->
     <target name="compile" depends="copy-resources">
-        <javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime="false"/>
+        <javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime="false">
+            <include name="**/*.java"/>
+        </javac>
     </target>
     
     <!-- Run the app -->
@@ -34,13 +36,17 @@
         </java>
     </target>
     
-    <!-- Create a JAR with resources included -->
+     <!-- Create a runnable JAR including resources -->
     <target name="jar" depends="compile">
+        <mkdir dir="${dist.dir}"/>
         <jar destfile="${dist.dir}/StickNote.jar" basedir="${build.dir}">
             <manifest>
                 <attribute name="Main-Class" value="${main.class}"/>
             </manifest>
+            <fileset dir="${build.dir}"/>
+            <fileset dir="${resources.dir}" includes="**/*"/>
         </jar>
+        <echo>JAR created at ${dist.dir}/StickNote.jar</echo>
     </target>
 
     <!-- Clean build and dist directories -->
