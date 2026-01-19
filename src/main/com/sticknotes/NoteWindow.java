@@ -22,20 +22,24 @@ public class NoteWindow extends JFrame {
         mainPanel.setBackground(new Color(37,37,37)); //dark themed background
         this.setContentPane(mainPanel);
 
+        //feature to only bring the app to focus when clicked 3 times  
+
         //after removing the default title bar(the X, minimize buttons), i will add a custom titlebar
         JPanel titleBar = new JPanel();
-        titleBar.setBackground(new Color(45, 45,45));
+        titleBar.setBackground(new Color(30, 30 ,30));
+        titleBar.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(80, 80, 80)));
         titleBar.setLayout(new BorderLayout());
         titleBar.setPreferredSize(new Dimension(this.getWidth(), 40));
 
         JLabel titleLabel = new JLabel(title);
-        titleLabel.setForeground(Color.WHITE);
+        titleLabel.setForeground(new Color(230,230,230));
         titleLabel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
+        titleLabel.setFont(new Font("Segoe UI Semibold", Font.BOLD, 16));
         titleBar.add(titleLabel, BorderLayout.WEST);
 
         JButton closeButton = new JButton("X");
-        closeButton.setForeground(Color.WHITE);
-        closeButton.setBackground(new Color(45, 45,45));
+        closeButton.setForeground(new Color(230,230,230));
+        closeButton.setBackground(new Color(30, 30 ,30));
         closeButton.setBorder(null);
         closeButton.setFocusPainted(false);
         closeButton.setFont(new Font("Arial", Font.BOLD, 14));
@@ -61,6 +65,7 @@ public class NoteWindow extends JFrame {
         textArea.setWrapStyleWord(true);
         textArea.setBackground(new Color(50, 50, 50)); // dark text area
         textArea.setForeground(Color.WHITE);
+        textArea.setCaretColor(new Color(230,230,230));
         textArea.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 
         JScrollPane scrollPane = new JScrollPane(textArea);
@@ -83,6 +88,16 @@ public class NoteWindow extends JFrame {
             }
         });
 
+
+        //opacity changin feature using swing window listener
+        this.addWindowFocusListener(new WindowAdapter() {
+            public void windowGainedFocus(WindowEvent e){
+                setOpacity(1.0f);
+            }
+            public void windowLostFocus(WindowEvent e){
+                setOpacity(0.55f);
+            }
+        });
 
         setResizable(true);
     }
