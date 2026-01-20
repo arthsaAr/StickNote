@@ -1,4 +1,4 @@
-# StickNote Windows App
+# <img src="resources/icon.png" width="28" /> StickNote Windows App
 **Stick the note to your screen!**
 
 A lightweight sticky notes app for your device. StickNote lets you create always-on-top notes that stay visible while you work, with a modern dark UI and smooth functionality.
