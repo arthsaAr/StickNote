@@ -19,6 +19,7 @@ A lightweight sticky notes app for your device. StickNote lets you create always
 - Resizable windows
 - Save the notes feature
 - Multiple themes options
+- Make the area behind the app still assessable
 
 ---
 
